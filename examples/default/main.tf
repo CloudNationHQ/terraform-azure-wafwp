@@ -18,7 +18,8 @@ module "rg" {
 }
 
 module "policy" {
-  source = "../../"
+  source  = "cloudnationhq/wafwp/azure"
+  version = "~> 1.0"
 
   config = {
     name           = "waf-policy"
