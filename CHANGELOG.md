@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.0.0...v1.0.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* fix module references ([#4](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/4)) ([fca726c](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/fca726cbcae9afb3bed9bb08fb858a96a9bdcec0))
+
 ## 1.0.0 (2024-11-13)
 
 
