@@ -2,6 +2,7 @@ resource "azurerm_web_application_firewall_policy" "this" {
   name                = var.config.name
   resource_group_name = coalesce(lookup(var.config, "resource_group", null), var.resource_group)
   location            = coalesce(lookup(var.config, "location", null), var.location)
+  tags                = try(var.config.tags, var.tags, {})
 
   dynamic "custom_rules" {
     for_each = try(
