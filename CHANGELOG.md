@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.0.2...v1.0.3) (2024-11-14)
+
+
+### Bug Fixes
+
+* Add policy_settings object ([#9](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/9)) ([6719c42](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/6719c42b874a12b398c1caa706ca1c2f7b8bdec5))
+
 ## [1.0.2](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.0.1...v1.0.2) (2024-11-14)
 
 
