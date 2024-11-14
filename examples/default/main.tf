@@ -26,6 +26,11 @@ module "policy" {
     resource_group = module.rg.groups.demo.name
     location       = module.rg.groups.demo.location
 
+    policy_settings = {
+      enabled = true
+      mode    = "Prevention"
+    }
+
     managed_rules = {
       managed_rule_sets = {
         owasp = {
