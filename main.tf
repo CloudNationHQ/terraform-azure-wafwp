@@ -4,6 +4,22 @@ resource "azurerm_web_application_firewall_policy" "this" {
   location            = coalesce(lookup(var.config, "location", null), var.location)
   tags                = try(var.config.tags, var.tags, {})
 
+  dynamic "policy_settings" {
+    for_each = lookup(var.config, "policy_settings", null) != null ? [var.config.policy_settings] : []
+
+    content {
+      enabled                                   = try(policy_settings.value.enabled, true)
+      mode                                      = try(policy_settings.value.mode, "Prevention")
+      file_upload_limit_in_mb                   = try(policy_settings.value.file_upload_limit_in_mb, 100)
+      request_body_check                        = try(policy_settings.value.request_body_check, true)
+      max_request_body_size_in_kb               = try(policy_settings.value.max_request_body_size_in_kb, 128)
+      request_body_enforcement                  = try(policy_settings.value.request_body_enforcement, true)
+      request_body_inspect_limit_in_kb          = try(policy_settings.value.request_body_inspect_limit_in_kb, 128)
+      js_challenge_cookie_expiration_in_minutes = try(policy_settings.value.js_challenge_cookie_expiration_in_minutes, 30)
+      file_upload_enforcement                   = try(policy_settings.value.file_upload_enforcement, null)
+    }
+  }
+
   dynamic "custom_rules" {
     for_each = try(
       var.config.custom_rules, {}
