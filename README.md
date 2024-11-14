@@ -24,7 +24,7 @@ End-to-end testing is not conducted on these modules, as they are individual com
 
 ## Features
 
-- flexible support for multple custom and managed rulesets and rules
+- flexible support for custom and managed rulesets and rules
 - rate limiting and geo-filtering capabilities
 - configurable OWASP rules and bot protection
 - advanced request validation and match conditions
