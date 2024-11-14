@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.0.1...v1.0.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* allow multiple managed rulsets ([#7](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/7)) ([2040193](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/20401935e8b65bf5c94c852ab4f8ea4747c8a06f))
+
 ## [1.0.1](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.0.0...v1.0.1) (2024-11-13)
 
 
