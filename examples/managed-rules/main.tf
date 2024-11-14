@@ -22,27 +22,38 @@ module "policy" {
   version = "~> 1.0"
 
   config = {
-    name           = "waf-policy"
+    name           = module.naming.web_application_firewall_policy.name
     resource_group = module.rg.groups.demo.name
     location       = "westeurope"
 
     managed_rules = {
-      managed_rule_set = {
-        version = "3.2"
-        type    = "OWASP"
+      managed_rule_sets = {
+        owasp = {
+          version = "3.2"
+          type    = "OWASP"
+          rule_group_overrides = {
+            sql_injection = {
+              rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+              rules = {
+                rule1 = {
+                  id      = "942200"
+                  enabled = false
+                }
+                rule2 = {
+                  id     = "942210"
+                  action = "Log"
+                }
+              }
+            }
+          }
+        }
 
-        rule_group_overrides = {
-          sql_injection = {
-            rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-            rules = {
-              rule1 = {
-                id      = "942200"
-                enabled = false
-              }
-              rule2 = {
-                id     = "942210"
-                action = "Log"
-              }
+        bot_protection = {
+          version = "1.0"
+          type    = "Microsoft_BotManagerRuleSet"
+          rule_group_overrides = {
+            bad_bots = {
+              rule_group_name = "BadBots"
             }
           }
         }
@@ -60,22 +71,6 @@ module "policy" {
               sqli = {
                 rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
                 excluded_rules  = ["942200", "942210", "942260"]
-              }
-            }
-          }
-        }
-
-        custom_header = {
-          match_variable          = "RequestHeaderValues"
-          selector                = "x-custom-header"
-          selector_match_operator = "Equals"
-          excluded_rule_set = {
-            type    = "OWASP"
-            version = "3.2"
-            rule_groups = {
-              xss = {
-                rule_group_name = "REQUEST-941-APPLICATION-ATTACK-XSS"
-                excluded_rules  = ["941320"]
               }
             }
           }

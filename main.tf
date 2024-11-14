@@ -41,33 +41,20 @@ resource "azurerm_web_application_firewall_policy" "this" {
   }
 
   dynamic "managed_rules" {
-    for_each = lookup(
-      var.config, "managed_rules", null
-    ) != null ? [var.config.managed_rules] : []
-
+    for_each = lookup(var.config, "managed_rules", null) != null ? [var.config.managed_rules] : []
     content {
       dynamic "managed_rule_set" {
-        for_each = lookup(
-          managed_rules.value, "managed_rule_set", null
-        ) != null ? [managed_rules.value.managed_rule_set] : []
-
+        for_each = try(managed_rules.value.managed_rule_sets, {})
         content {
           version = try(managed_rule_set.value.version, "2.1")
           type    = try(managed_rule_set.value.type, null)
 
           dynamic "rule_group_override" {
-            for_each = try(
-              managed_rule_set.value.rule_group_overrides, {}
-            )
-
+            for_each = try(managed_rule_set.value.rule_group_overrides, {})
             content {
               rule_group_name = rule_group_override.value.rule_group_name
-
               dynamic "rule" {
-                for_each = try(
-                  rule_group_override.value.rules, {}
-                )
-
+                for_each = try(rule_group_override.value.rules, {})
                 content {
                   id      = rule.value.id
                   action  = try(rule.value.action, null)
@@ -80,29 +67,20 @@ resource "azurerm_web_application_firewall_policy" "this" {
       }
 
       dynamic "exclusion" {
-        for_each = try(
-          managed_rules.value.exclusions, {}
-        )
-
+        for_each = try(managed_rules.value.exclusions, {})
         content {
           selector                = exclusion.value.selector
           match_variable          = exclusion.value.match_variable
           selector_match_operator = exclusion.value.selector_match_operator
 
           dynamic "excluded_rule_set" {
-            for_each = lookup(
-              exclusion.value, "excluded_rule_set", null
-            ) != null ? [exclusion.value.excluded_rule_set] : []
-
+            for_each = lookup(exclusion.value, "excluded_rule_set", null) != null ? [exclusion.value.excluded_rule_set] : []
             content {
               type    = try(excluded_rule_set.value.type, null)
               version = try(excluded_rule_set.value.version, null)
 
               dynamic "rule_group" {
-                for_each = try(
-                  excluded_rule_set.value.rule_groups, {}
-                )
-
+                for_each = try(excluded_rule_set.value.rule_groups, {})
                 content {
                   rule_group_name = rule_group.value.rule_group_name
                   excluded_rules  = try(rule_group.value.excluded_rules, [])

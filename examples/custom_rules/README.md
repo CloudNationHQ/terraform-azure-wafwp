@@ -8,10 +8,10 @@ config = object({
   resource_group = string
   location = string
   managed_rules = object({
-    managed_rule_set = object({
+    managed_rule_sets = map(object({
       version = optional(string, "2.1")
       type = optional(string)
-    })
+    }))
   })
   custom_rules = optional(map(object({
     name = optional(string)
