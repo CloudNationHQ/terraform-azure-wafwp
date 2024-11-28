@@ -1,6 +1,6 @@
 module "naming" {
   source  = "cloudnationhq/naming/azure"
-  version = "~> 0.1"
+  version = "~> 0.22"
 
   suffix = ["demo", "dev"]
 }
@@ -25,6 +25,11 @@ module "policy" {
     name           = module.naming.web_application_firewall_policy.name
     resource_group = module.rg.groups.demo.name
     location       = module.rg.groups.demo.location
+
+    policy_settings = {
+      enabled = true
+      mode    = "Prevention"
+    }
 
     managed_rules = {
       managed_rule_sets = {
