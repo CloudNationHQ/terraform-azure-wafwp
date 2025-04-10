@@ -17,6 +17,25 @@ resource "azurerm_web_application_firewall_policy" "this" {
       request_body_inspect_limit_in_kb          = try(policy_settings.value.request_body_inspect_limit_in_kb, 128)
       js_challenge_cookie_expiration_in_minutes = try(policy_settings.value.js_challenge_cookie_expiration_in_minutes, 30)
       file_upload_enforcement                   = try(policy_settings.value.file_upload_enforcement, null)
+
+      dynamic "log_scrubbing" {
+        for_each = try(policy_settings.value.log_scrubbing, null) != null ? [policy_settings.value.log_scrubbing] : []
+
+        content {
+          enabled = try(log_scrubbing.value.enabled, true)
+
+          dynamic "rule" {
+            for_each = try(log_scrubbing.value.rules, [])
+
+            content {
+              enabled                 = try(rule.value.enabled, true)
+              match_variable          = rule.value.match_variable
+              selector_match_operator = try(rule.value.selector_match_operator, null)
+              selector                = try(rule.value.selector, null)
+            }
+          }
+        }
+      }
     }
   }
 
