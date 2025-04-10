@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.2.0...v1.3.0) (2025-04-10)
+
+
+### Features
+
+* add log scrubbing feature to web application firewall policy ([#22](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/22)) ([ecc2434](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/ecc24340a4ab6dec44736c34f58be32cc23f4761))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#20](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/20)) ([8d3e2ad](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/8d3e2adb32c87220072b2b2cbec5987d2f19527b))
+* **deps:** bump golang.org/x/net from 0.33.0 to 0.36.0 in /tests ([#21](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/21)) ([02dbf48](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/02dbf489847f78c1e9b770d4ee5fd64e71777538))
+
 ## [1.2.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.1.0...v1.2.0) (2025-01-20)
 
 
