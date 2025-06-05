@@ -1,6 +1,6 @@
 module "naming" {
   source  = "cloudnationhq/naming/azure"
-  version = "~> 0.22"
+  version = "~> 0.24"
 
   suffix = ["demo", "dev"]
 }
@@ -19,23 +19,21 @@ module "rg" {
 
 module "policy" {
   source  = "cloudnationhq/wafwp/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   config = {
-    name           = module.naming.web_application_firewall_policy.name
-    resource_group = module.rg.groups.demo.name
-    location       = "westeurope"
-
+    name                = module.naming.web_application_firewall_policy.name
+    resource_group_name = module.rg.groups.demo.name
+    location            = "westeurope"
     policy_settings = {
       enabled = true
       mode    = "Prevention"
     }
-
     managed_rules = {
       managed_rule_sets = {
         owasp = {
-          version = "3.2"
           type    = "OWASP"
+          version = "3.2"
           rule_group_overrides = {
             sql_injection = {
               rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
@@ -54,8 +52,8 @@ module "policy" {
         }
 
         bot_protection = {
-          version = "1.0"
           type    = "Microsoft_BotManagerRuleSet"
+          version = "1.1"
           rule_group_overrides = {
             bad_bots = {
               rule_group_name = "BadBots"
@@ -70,8 +68,7 @@ module "policy" {
           selector                = "/api/v1/special-endpoint"
           selector_match_operator = "Contains"
           excluded_rule_set = {
-            type    = "OWASP"
-            version = "3.2"
+            type = "OWASP"
             rule_groups = {
               sqli = {
                 rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"

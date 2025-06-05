@@ -1,6 +1,6 @@
 module "naming" {
   source  = "cloudnationhq/naming/azure"
-  version = "~> 0.22"
+  version = "~> 0.24"
 
   suffix = ["demo", "dev"]
 }
@@ -19,30 +19,27 @@ module "rg" {
 
 module "policy" {
   source  = "cloudnationhq/wafwp/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   config = {
-    name           = module.naming.web_application_firewall_policy.name
-    resource_group = module.rg.groups.demo.name
-    location       = module.rg.groups.demo.location
-
+    name                = module.naming.web_application_firewall_policy.name
+    resource_group_name = module.rg.groups.demo.name
+    location            = module.rg.groups.demo.location
     policy_settings = {
       enabled = true
       mode    = "Prevention"
     }
-
     managed_rules = {
       managed_rule_sets = {
         owasp = {
-          version = "3.2"
           type    = "OWASP"
+          version = "3.2"
         }
       }
     }
 
     custom_rules = {
-      api_rate_limit = {
-        name                 = "RateLimitAPIEndpoints"
+      apiRateLimit = {
         priority             = 10
         rule_type            = "RateLimitRule"
         action               = "Block"
@@ -64,8 +61,7 @@ module "policy" {
         }
       }
 
-      block_bad_bots = {
-        name      = "BlockMaliciousBots"
+      blockBadBots = {
         priority  = 20
         rule_type = "MatchRule"
         action    = "Block"
@@ -86,8 +82,7 @@ module "policy" {
         }
       }
 
-      geo_blocking = {
-        name      = "GeoBlocking"
+      geoBlocking = {
         priority  = 40
         rule_type = "MatchRule"
         action    = "Block"
@@ -106,8 +101,7 @@ module "policy" {
         }
       }
 
-      suspicious_queries = {
-        name      = "BlockSuspiciousQueries"
+      suspiciousQueries = {
         priority  = 60
         rule_type = "MatchRule"
         action    = "Block"
