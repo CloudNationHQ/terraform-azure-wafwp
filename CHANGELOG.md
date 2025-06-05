@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.3.0...v2.0.0) (2025-06-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* The data structure changed, causing a recreate on existing resources.
+
+### Features
+
+* small refactor ([#26](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/26)) ([3fba466](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/3fba466d993e315f81121d4819e8c27bcd751e1c))
+
+### Upgrade from v1.3.0 to v2.0.0:
+
+- Update module reference to: `version = "~> 2.0"`
+- The property and variable resource_group is renamed to resource_group_name
+- The rule set version default is changed. It should be set in the config now, since we support different types
+
 ## [1.3.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.2.0...v1.3.0) (2025-04-10)
 
 
