@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v2.0.0...v2.1.0) (2025-09-09)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#25](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/25)) ([286863b](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/286863ba9e8483d6da5af3872251c1b5974d4e23))
+
 ## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.3.0...v2.0.0) (2025-06-05)
 
 
