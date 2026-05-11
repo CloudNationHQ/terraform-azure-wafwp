@@ -33,7 +33,7 @@ The following requirements are needed by this module:
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (4.72.0)
 
 ## Resources
 
@@ -67,6 +67,15 @@ object({
       request_body_inspect_limit_in_kb          = optional(number, 128)
       js_challenge_cookie_expiration_in_minutes = optional(number, 30)
       file_upload_enforcement                   = optional(bool, null)
+      log_scrubbing = optional(object({
+        enabled = optional(bool)
+        rules = optional(map(object({
+          enabled                 = optional(bool)
+          match_variable          = string
+          selector_match_operator = optional(string, "Equals")
+          selector                = optional(string)
+        })), {})
+      }))
     }), null)
     custom_rules = optional(map(object({
       action               = string
