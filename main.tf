@@ -31,15 +31,13 @@ resource "azurerm_web_application_firewall_policy" "this" {
       file_upload_enforcement                   = policy_settings.value.file_upload_enforcement
 
       dynamic "log_scrubbing" {
-        for_each = try(policy_settings.value.log_scrubbing, null) != null ? [policy_settings.value.log_scrubbing] : []
+        for_each = policy_settings.value.log_scrubbing != null ? { "this" = policy_settings.value.log_scrubbing } : {}
 
         content {
           enabled = log_scrubbing.value.enabled
 
           dynamic "rule" {
-            for_each = try(
-              log_scrubbing.value.rules, []
-            )
+            for_each = log_scrubbing.value.rules
 
             content {
               enabled                 = rule.value.enabled

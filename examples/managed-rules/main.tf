@@ -28,6 +28,15 @@ module "policy" {
     policy_settings = {
       enabled = true
       mode    = "Prevention"
+
+      log_scrubbing = {
+        rules = {
+          scrub_auth_header = {
+            match_variable = "RequestHeaderNames"
+            selector       = "Authorization"
+          }
+        }
+      }
     }
     managed_rules = {
       managed_rule_sets = {
