@@ -159,7 +159,7 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_policy"></a> [policy](#output\_policy)
+### <a name="output_firewall_policy"></a> [firewall\_policy](#output\_firewall\_policy)
 
 Description: contains web application firewall policy configuration
 <!-- END_TF_DOCS -->
