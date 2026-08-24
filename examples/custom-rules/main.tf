@@ -18,7 +18,8 @@ module "rg" {
 }
 
 module "policy" {
-  source  = "../../"
+  source  = "cloudnationhq/wafwp/azure"
+  version = "~> 3.0"
 
   policy = {
     name                = module.naming.web_application_firewall_policy.name
