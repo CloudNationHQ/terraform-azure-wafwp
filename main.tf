@@ -1,23 +1,20 @@
 resource "azurerm_web_application_firewall_policy" "this" {
   resource_group_name = coalesce(
-    lookup(
-      var.config, "resource_group_name", null
-    ), var.resource_group_name
+    var.policy.resource_group_name, var.resource_group_name
   )
 
   location = coalesce(
-    lookup(var.config, "location", null
-    ), var.location
+    var.policy.location, var.location
   )
 
-  name = var.config.name
+  name = var.policy.name
 
   tags = coalesce(
-    var.config.tags, var.tags
+    var.policy.tags, var.tags
   )
 
   dynamic "policy_settings" {
-    for_each = lookup(var.config, "policy_settings", null) != null ? [var.config.policy_settings] : []
+    for_each = var.policy.policy_settings != null ? { "this" = var.policy.policy_settings } : {}
 
     content {
       enabled                                   = policy_settings.value.enabled
@@ -52,9 +49,7 @@ resource "azurerm_web_application_firewall_policy" "this" {
   }
 
   dynamic "custom_rules" {
-    for_each = try(
-      var.config.custom_rules, {}
-    )
+    for_each = var.policy.custom_rules
 
     content {
       name = coalesce(
@@ -91,30 +86,24 @@ resource "azurerm_web_application_firewall_policy" "this" {
   }
 
   dynamic "managed_rules" {
-    for_each = lookup(var.config, "managed_rules", null) != null ? [var.config.managed_rules] : []
+    for_each = var.policy.managed_rules != null ? { "this" = var.policy.managed_rules } : {}
 
     content {
       dynamic "managed_rule_set" {
-        for_each = try(
-          managed_rules.value.managed_rule_sets, {}
-        )
+        for_each = managed_rules.value.managed_rule_sets
 
         content {
           version = managed_rule_set.value.version
           type    = managed_rule_set.value.type
 
           dynamic "rule_group_override" {
-            for_each = try(
-              managed_rule_set.value.rule_group_overrides, {}
-            )
+            for_each = managed_rule_set.value.rule_group_overrides
 
             content {
               rule_group_name = rule_group_override.value.rule_group_name
 
               dynamic "rule" {
-                for_each = try(
-                  rule_group_override.value.rules, {}
-                )
+                for_each = rule_group_override.value.rules
 
                 content {
                   id      = rule.value.id
@@ -128,9 +117,7 @@ resource "azurerm_web_application_firewall_policy" "this" {
       }
 
       dynamic "exclusion" {
-        for_each = try(
-          managed_rules.value.exclusions, {}
-        )
+        for_each = managed_rules.value.exclusions
 
         content {
           selector                = exclusion.value.selector
@@ -138,16 +125,14 @@ resource "azurerm_web_application_firewall_policy" "this" {
           selector_match_operator = exclusion.value.selector_match_operator
 
           dynamic "excluded_rule_set" {
-            for_each = lookup(exclusion.value, "excluded_rule_set", null) != null ? [exclusion.value.excluded_rule_set] : []
+            for_each = exclusion.value.excluded_rule_set != null ? { "this" = exclusion.value.excluded_rule_set } : {}
 
             content {
               type    = excluded_rule_set.value.type
               version = excluded_rule_set.value.version
 
               dynamic "rule_group" {
-                for_each = try(
-                  excluded_rule_set.value.rule_groups, {}
-                )
+                for_each = excluded_rule_set.value.rule_groups
 
                 content {
                   rule_group_name = rule_group.value.rule_group_name

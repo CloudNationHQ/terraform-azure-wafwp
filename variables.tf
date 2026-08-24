@@ -1,20 +1,20 @@
-variable "config" {
-  description = "Contains all Web Application Firewall policy configuration"
+variable "policy" {
+  description = "contains all web application firewall policy configuration"
   type = object({
     name                = string
     resource_group_name = optional(string, null)
     location            = optional(string, null)
     tags                = optional(map(string))
     policy_settings = optional(object({
-      enabled                                   = optional(bool, true)
+      enabled                                   = optional(bool)
       mode                                      = optional(string, "Prevention")
       file_upload_limit_in_mb                   = optional(number, 100)
-      request_body_check                        = optional(bool, true)
+      request_body_check                        = optional(bool)
       max_request_body_size_in_kb               = optional(number, 128)
-      request_body_enforcement                  = optional(bool, true)
+      request_body_enforcement                  = optional(bool)
       request_body_inspect_limit_in_kb          = optional(number, 128)
       js_challenge_cookie_expiration_in_minutes = optional(number, 30)
-      file_upload_enforcement                   = optional(bool, null)
+      file_upload_enforcement                   = optional(bool)
       log_scrubbing = optional(object({
         enabled = optional(bool)
         rules = optional(map(object({
@@ -30,7 +30,7 @@ variable "config" {
       priority             = number
       rule_type            = string
       name                 = optional(string, null)
-      enabled              = optional(bool, null)
+      enabled              = optional(bool)
       group_rate_limit_by  = optional(string, null)
       rate_limit_duration  = optional(string, null)
       rate_limit_threshold = optional(number, null)
@@ -40,7 +40,7 @@ variable "config" {
           selector      = optional(string, null)
         }))
         operator           = string
-        negation_condition = optional(bool, null)
+        negation_condition = optional(bool)
         match_values       = optional(list(string), [])
         transforms         = optional(list(string), null)
       }))
@@ -54,7 +54,7 @@ variable "config" {
           rules = optional(map(object({
             id      = string
             action  = optional(string, null)
-            enabled = optional(bool, null)
+            enabled = optional(bool)
           })), {})
         })), {})
       })), {})
@@ -74,13 +74,13 @@ variable "config" {
     }), null)
   })
   validation {
-    condition     = var.config.location != null || var.location != null
-    error_message = "location must be provided either in the object or as a separate variable."
+    condition     = lookup(var.policy, "location", null) != null || var.location != null
+    error_message = "location must be set on var.policy.location or on the module-level var.location."
   }
 
   validation {
-    condition     = var.config.resource_group_name != null || var.resource_group_name != null
-    error_message = "resource group name must be provided either in the object or as a separate variable."
+    condition     = lookup(var.policy, "resource_group_name", null) != null || var.resource_group_name != null
+    error_message = "resource_group_name must be set on var.policy.resource_group_name or on the module-level var.resource_group_name."
   }
 
 }
