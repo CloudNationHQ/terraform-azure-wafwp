@@ -27,13 +27,13 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (4.72.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
 
 ## Resources
 
@@ -45,9 +45,9 @@ The following resources are used by this module:
 
 The following input variables are required:
 
-### <a name="input_config"></a> [config](#input\_config)
+### <a name="input_policy"></a> [policy](#input\_policy)
 
-Description: Contains all Web Application Firewall policy configuration
+Description: contains all web application firewall policy configuration
 
 Type:
 
@@ -58,15 +58,15 @@ object({
     location            = optional(string, null)
     tags                = optional(map(string))
     policy_settings = optional(object({
-      enabled                                   = optional(bool, true)
+      enabled                                   = optional(bool)
       mode                                      = optional(string, "Prevention")
       file_upload_limit_in_mb                   = optional(number, 100)
-      request_body_check                        = optional(bool, true)
+      request_body_check                        = optional(bool)
       max_request_body_size_in_kb               = optional(number, 128)
-      request_body_enforcement                  = optional(bool, true)
+      request_body_enforcement                  = optional(bool)
       request_body_inspect_limit_in_kb          = optional(number, 128)
       js_challenge_cookie_expiration_in_minutes = optional(number, 30)
-      file_upload_enforcement                   = optional(bool, null)
+      file_upload_enforcement                   = optional(bool)
       log_scrubbing = optional(object({
         enabled = optional(bool)
         rules = optional(map(object({
@@ -82,7 +82,7 @@ object({
       priority             = number
       rule_type            = string
       name                 = optional(string, null)
-      enabled              = optional(bool, null)
+      enabled              = optional(bool)
       group_rate_limit_by  = optional(string, null)
       rate_limit_duration  = optional(string, null)
       rate_limit_threshold = optional(number, null)
@@ -92,7 +92,7 @@ object({
           selector      = optional(string, null)
         }))
         operator           = string
-        negation_condition = optional(bool, null)
+        negation_condition = optional(bool)
         match_values       = optional(list(string), [])
         transforms         = optional(list(string), null)
       }))
@@ -106,7 +106,7 @@ object({
           rules = optional(map(object({
             id      = string
             action  = optional(string, null)
-            enabled = optional(bool, null)
+            enabled = optional(bool)
           })), {})
         })), {})
       })), {})
@@ -161,7 +161,7 @@ The following outputs are exported:
 
 ### <a name="output_firewall_policy"></a> [firewall\_policy](#output\_firewall\_policy)
 
-Description: contains web application fireqwall policy configuration
+Description: contains web application firewall policy configuration
 <!-- END_TF_DOCS -->
 
 ## Goals
