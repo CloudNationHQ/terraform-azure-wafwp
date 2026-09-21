@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v3.0.0...v3.1.0) (2026-09-21)
+
+
+### Features
+
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#46](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/46)) ([187a995](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/187a99552d35775539a4892b5bd83afd540dc170))
+* **deps:** bump golang.org/x/crypto from 0.45.0 to 0.52.0 in /tests ([#44](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/44)) ([871b871](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/871b87154b7274f4f453d8277012fc8502a162cb))
+* **deps:** bump golang.org/x/net from 0.54.0 to 0.55.0 in /tests ([#45](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/45)) ([26e927e](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/26e927ea0a7fe279f3810cd4f14c1f06688267e5))
+
 ## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v2.0.0...v3.0.0) (2026-09-21)
 
 
