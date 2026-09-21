@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v2.0.0...v3.0.0) (2026-09-21)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#25](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/25)) ([286863b](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/286863ba9e8483d6da5af3872251c1b5974d4e23))
+* **deps:** bump github.com/ulikunitz/xz from 0.5.10 to 0.5.14 in /tests ([#31](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/31)) ([db628ec](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/db628ec6170fa346008f30250318d2e190699b84))
+* **deps:** bump golang.org/x/crypto from 0.36.0 to 0.45.0 in /tests ([#37](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/37)) ([a3bbca9](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/a3bbca9532d3c8d974984ed988764a07205896e6))
+* upgrade to azurem v5 ([#42](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/42)) ([f174844](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/f174844daf18f48c607866a7919ff2361a4b365a))
+
+
+### Bug Fixes
+
+* log_scrubbing wired into policy_settings ([#40](https://github.com/CloudNationHQ/terraform-azure-wafwp/issues/40)) ([6533318](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/65333185564760946a5a8fa38e2b0d8ae0b15e62))
+
+
+### Miscellaneous Chores
+
+* release 3.0.0 ([77d7d44](https://github.com/CloudNationHQ/terraform-azure-wafwp/commit/77d7d448ac984a443e53e170c55303bf2027dc56))
+
 ## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-wafwp/compare/v1.3.0...v2.0.0) (2025-06-05)
 
 
